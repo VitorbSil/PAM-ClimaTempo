@@ -9,6 +9,45 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
+        <Label 
+            Text="{Binding Estado}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="{Binding Atualizado_Em}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="{Binding Data}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="{Binding Condicao}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="{Binding Condicao_Desc}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label
+            Text="{Binding Max}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="{Binding Min}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+            Text="{Binding Indiceuv}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
         <Button Command="{Binding BuscarPrevisaoCommand}" Text="Carregar"/>
     </VerticalStackLayout>
 </ContentPage>
