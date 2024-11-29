@@ -62,7 +62,7 @@ namespace ClimaTempo.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    previsao = JsonSerializer.Deserialize<Previsao>(content, options);
+                    previsaoProxDias = JsonSerializer.Deserialize<Previsao>(content, options);
                 }
             }
             catch (Exception ex)
