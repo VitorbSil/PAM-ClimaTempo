@@ -1,6 +1,7 @@
 ﻿using ClimaTempo.Models;
 using ClimaTempo.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -31,6 +32,7 @@ namespace ClimaTempo.ViewModels
         private double min;
         [ObservableProperty]
         private double indiceuv;
+
         [ObservableProperty]
         private List<Clima> proximosDias;
 
@@ -41,6 +43,9 @@ namespace ClimaTempo.ViewModels
         private string cidade_pesquisada;
 
         [ObservableProperty]
+        private string previsao_cidade;
+
+        [ObservableProperty]
         private List<Cidade> cidade_list;
 
         public ICommand BuscarPrevisaoCommand{ get; }
@@ -48,26 +53,15 @@ namespace ClimaTempo.ViewModels
 
         public PrevisaoViewModel()
         {
-            BuscarPrevisaoCommand = new Command(BuscarPrevisao);
+            BuscarPrevisaoCommand = new Command<int>(BuscarPrevisao);
             BuscarCidadesCommand = new Command(BuscarCidades);
         }
 
-        public async void BuscarPrevisao()
+        public async void BuscarPrevisao(int id)
         {
-            //Busca os dados da previsão de uma cidade especificada
-            previsao = await new PrevisaoService().GetPrevisaoById(244);
-            Estado = previsao.Estado;
-            Cidade = previsao.Cidade;
-            Atualizado_Em = previsao.Atualizado_Em.ToString();
-            Data = previsao.Clima[0].Data;
-            Condicao = previsao.Clima[0].Condicao;
-            Condicao_Desc = previsao.Clima[0].Condicao_desc;
+            previsao = await new PrevisaoService().GetPrevisaoById(id);
             Max = previsao.Clima[0].Max;
-            Min = previsao.Clima[0].Min;
-
-            //Busca a previsão dos próximos 3 dias
-            proxPrevisao = await new PrevisaoService().GetPrevisaoForXDaysById(244, 3);
-            ProximosDias = proxPrevisao.Clima;
+            Min = previsao.Clima[0].Max;
         }
 
         public async void BuscarCidades()
@@ -76,8 +70,14 @@ namespace ClimaTempo.ViewModels
             Cidade_list = await new CidadeService().GetCidadesByName(Cidade_pesquisada);
         }
 
-
-
+         /* Estado = previsao.Estado;
+            Cidade = previsao.Cidade;
+            Atualizado_Em = previsao.Atualizado_Em.ToString();
+            Data = previsao.Clima[0].Data;
+            Condicao = previsao.Clima[0].Condicao;
+            Condicao_Desc = previsao.Clima[0].Condicao_desc;
+            Max = previsao.Clima[0].Max;
+            Min = previsao.Clima[0].Min;*/
 
 
 

@@ -2,26 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClimaTempo.Views.PrevisaoView"
+             x:Name="Cachorro"
              Title="PrevisaoView">
+    <ScrollView>
     <VerticalStackLayout>
 
-        <Entry
+            <Entry
+            WidthRequest="300"
             Placeholder = "Digite aqui o nome da cidade"
-            Text = "{Binding Cidade_pesquisada}"/>    
-
-        <Button Command = "{Binding BuscarCidadesCommand}" Text = "Pesquisar Cidade"/>
-
-        <CollectionView ItemsSource = "{Binding Cidade_list}">
+            Text = "{Binding Cidade_pesquisada}"/>
+            <Label Text="{Binding Max}"/>
+            <Label Text="{Binding Min}"/>
+            <Button WidthRequest="300" Command = "{Binding BuscarCidadesCommand}" Text = "Pesquisar Cidade"/>
+            <CollectionView ItemsSource = "{Binding Cidade_list}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <HorizontalStackLayout>
+                    <VerticalStackLayout HeightRequest="130">
                         <Label Text = "{Binding Nome}"/>
                         <Label Text = "{Binding Id}"/>
                         <Label Text = "{Binding Estado}"/>
-                    </HorizontalStackLayout>
+                            <Button Command="{Binding Path=BindingContext.BuscarPrevisaoCommand,
+                                Source={x:Reference Cachorro}}"
+                                    CommandParameter="{Binding Id}" 
+                                    HorizontalOptions="Start" WidthRequest="100" Text="Ver Clima"/>
+                    </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        
+        
+        
+        
+        
+        
         <Label 
             Text="{Binding Cidade}"
             VerticalOptions="Center" 
@@ -91,6 +104,7 @@
 
 
 
-        <Button Command="{Binding BuscarPrevisaoCommand}" Text="Carregar"/>
+        <Button WidthRequest="300" Command="{Binding BuscarPrevisaoCommand}" Text="Não funcional!"/>
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
